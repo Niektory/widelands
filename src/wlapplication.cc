@@ -650,9 +650,12 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			break;
 		case SDL_WINDOWEVENT:
 			if (ev.window.event == SDL_WINDOWEVENT_RESIZED) {
+				log("++ SDL_WINDOWEVENT_RESIZED: %dx%d\n", ev.window.data1, ev.window.data2);
 				g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
 				set_config_int("xres", ev.window.data1);
 				set_config_int("yres", ev.window.data2);
+			} else if (ev.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+				log("++ SDL_WINDOWEVENT_SIZE_CHANGED: %dx%d\n", ev.window.data1, ev.window.data2);
 			}
 			break;
 		case SDL_QUIT:
@@ -778,6 +781,7 @@ void WLApplication::set_mouse_lock(const bool locked) {
 }
 
 void WLApplication::refresh_graphics() {
+	log("++ refresh_graphics()\n");
 	g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
 	                        get_config_int("yres", kDefaultResolutionH), true);
 	g_gr->set_fullscreen(get_config_bool("fullscreen", false));

@@ -308,6 +308,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		}
 	}
 
+	log("++ FullscreenMenuOptions: %dx%d\n", opt.xres, opt.yres);
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
 		const bool selected = resolutions_[i].xres == opt.xres && resolutions_[i].yres == opt.yres;
@@ -625,6 +626,7 @@ void OptionsCtrl::handle_menu() {
 	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
+		log("++ handle_menu(): clicked apply\n");
 		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
@@ -673,6 +675,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 
 void OptionsCtrl::save_options() {
 	OptionsCtrl::OptionsStruct opt = opt_dialog_->get_values();
+
+	log("++ save_options(): %dx%d\n", opt.xres, opt.yres);
 
 	// Interface options
 	opt_section_.set_int("xres", opt.xres);

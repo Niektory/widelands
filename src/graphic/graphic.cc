@@ -155,6 +155,9 @@ int Graphic::get_yres() {
 }
 
 void Graphic::change_resolution(int w, int h, bool resize_window) {
+	log("++ change_resolution(): %dx%d to %dx%d; resize_window=%s\n",
+	    window_mode_width_, window_mode_height_, w, h, resize_window ? "true" : "false");
+
 	window_mode_width_ = w;
 	window_mode_height_ = h;
 
@@ -168,12 +171,21 @@ void Graphic::change_resolution(int w, int h, bool resize_window) {
 void Graphic::set_window_size(int w, int h) {
 	// SDL can get badly confused when trying to resize a maximized window
 	// so we restore it first.
+	int debug_w, debug_h;
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	if (flags & SDL_WINDOW_MAXIMIZED) {
+		SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+		log("++ set_window_size(): restoring window from %dx%d\n", debug_w, debug_h);
 		SDL_RestoreWindow(sdl_window_);
+		SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+		log("++ set_window_size(): restored window to %dx%d\n", debug_w, debug_h);
 	};
 
+	SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+	log("++ set_window_size(): attempting resize %dx%d to %dx%d\n", debug_w, debug_h, w, h);
 	SDL_SetWindowSize(sdl_window_, w, h);
+	SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+	log("++ set_window_size(): resized to %dx%d\n", debug_w, debug_h);
 }
 
 void Graphic::resolution_changed() {
@@ -182,6 +194,8 @@ void Graphic::resolution_changed() {
 
 	int new_w, new_h;
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
+
+	log("++ resolution_changed(): old %dx%d; new %dx%d\n", old_w, old_h, new_w, new_h);
 
 	if (old_w == new_w && old_h == new_h) {
 		return;
@@ -240,6 +254,9 @@ void Graphic::set_fullscreen(const bool value) {
 	resolution_changed();
 }
 
+static int debug_width = 0;
+static int debug_height = 0;
+
 /**
  * Bring the screen uptodate.
  */
@@ -253,7 +270,13 @@ void Graphic::refresh() {
 		int true_width, true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
+		if (true_width != debug_width || true_height != debug_height) {
+			log("++ refresh(): window size %dx%d\n", true_width, true_height);
+		}
+		debug_width = true_width;
+		debug_height = true_height;
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
+			log("++ refresh(): resizing to %dx%d\n", window_mode_width_, window_mode_height_);
 			set_window_size(window_mode_width_, window_mode_height_);
 		}
 	}
