@@ -461,18 +461,23 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
-constexpr int16_t kFocusRectStrength = 6;
+constexpr int16_t kFocusRectStrength = 1;
+constexpr int16_t kFocusRectPadding = 0;
 std::vector<Recti> Panel::focus_overlay_rects() {
 	const int16_t w = get_w();
 	const int16_t h = get_h();
 	if (w < 2 * kFocusRectStrength || h < 2 * kFocusRectStrength) {
 		return {Recti(0, 0, w, h)};
 	}
-	return {Recti(0, 0, w, kFocusRectStrength),
-	        Recti(0, h - kFocusRectStrength, w, kFocusRectStrength),
-	        Recti(0, kFocusRectStrength, kFocusRectStrength, h - 2 * kFocusRectStrength),
-	        Recti(w - kFocusRectStrength, kFocusRectStrength, kFocusRectStrength,
-	              h - 2 * kFocusRectStrength)};
+	return {Recti(kFocusRectPadding, kFocusRectPadding, w - 2 * kFocusRectPadding,
+	              kFocusRectStrength),
+	        Recti(kFocusRectPadding, h - kFocusRectPadding - kFocusRectStrength,
+	              w - 2 * kFocusRectPadding, kFocusRectStrength),
+	        Recti(kFocusRectPadding, kFocusRectPadding + kFocusRectStrength, kFocusRectStrength,
+	              h - 2 * kFocusRectPadding - 2 * kFocusRectStrength),
+	        Recti(w - kFocusRectPadding - kFocusRectStrength,
+	              kFocusRectPadding + kFocusRectStrength, kFocusRectStrength,
+	              h - 2 * kFocusRectPadding - 2 * kFocusRectStrength)};
 }
 
 /**

@@ -102,10 +102,22 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
 	set_can_focus(true);
 }
 
+constexpr int16_t kFocusRectStrength = 1;
+constexpr int16_t kFocusRectPadding = 2;
 std::vector<Recti> TabPanel::focus_overlay_rects() {
 	if (active_ < tabs_.size()) {
 		const Tab& tab = *tabs_[active_];
-		return {Recti(tab.get_x(), tab.get_y(), tab.get_w(), tab.get_h())};
+		return {Recti(tab.get_x() + kFocusRectPadding, tab.get_y() + kFocusRectPadding,
+		              tab.get_w() - 2 * kFocusRectPadding, kFocusRectStrength),
+		        Recti(tab.get_x() + kFocusRectPadding,
+		              tab.get_y() + tab.get_h() - kFocusRectPadding - kFocusRectStrength,
+		              tab.get_w() - 2 * kFocusRectPadding, kFocusRectStrength),
+		        Recti(tab.get_x() + kFocusRectPadding,
+		              tab.get_y() + kFocusRectPadding + kFocusRectStrength, kFocusRectStrength,
+		              tab.get_h() - 2 * kFocusRectPadding - 2 * kFocusRectStrength),
+		        Recti(tab.get_x() + tab.get_w() - kFocusRectPadding - kFocusRectStrength,
+		              tab.get_y() + kFocusRectPadding + kFocusRectStrength, kFocusRectStrength,
+		              tab.get_h() - 2 * kFocusRectPadding - 2 * kFocusRectStrength)};
 	}
 	return {Recti(0, 0, get_w(), kTabPanelButtonHeight)};
 }
