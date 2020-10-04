@@ -655,14 +655,24 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			case SDL_WINDOWEVENT_RESIZED:
 				// Do not save the new size to config at this point to avoid saving sizes that
 				// result from maximization etc. Save at shutdown instead.
+				log_dbg("++ SDL_WINDOWEVENT_RESIZED: %dx%d\n", ev.window.data1, ev.window.data2);
+				g_gr->maximized();
 				if (!g_gr->fullscreen()) {
 					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
 				}
 				break;
+			case SDL_WINDOWEVENT_SIZE_CHANGED:
+				log_dbg("++ SDL_WINDOWEVENT_SIZE_CHANGED: %dx%d\n", ev.window.data1, ev.window.data2);
+				g_gr->maximized();
+				break;
 			case SDL_WINDOWEVENT_MAXIMIZED:
+				log_dbg("++ SDL_WINDOWEVENT_MAXIMIZED\n");
+				g_gr->maximized();
 				set_config_bool("maximized", true);
 				break;
 			case SDL_WINDOWEVENT_RESTORED:
+				log_dbg("++ SDL_WINDOWEVENT_RESTORED\n");
+				g_gr->maximized();
 				set_config_bool("maximized", g_gr->maximized());
 				break;
 			}
