@@ -68,7 +68,8 @@ public:
 	void think() override;
 	void draw(RenderTarget& dst) override;
 
-	std::map<const Widelands::OPtr<Widelands::Ship>, Widelands::Coords>& get_expedition_port_spaces() {
+	std::map<const Widelands::OPtr<Widelands::Ship>, Widelands::Coords>&
+	get_expedition_port_spaces() {
 		return expedition_port_spaces_;
 	}
 	bool has_expedition_port_space(const Widelands::Coords&) const;
