@@ -57,18 +57,10 @@ struct Waterway : public RoadBase {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t) override;
 
-	const FerryFleet* get_fleet() const {
-		return fleet_;
-	}
-	FerryFleet* get_fleet() {
-		return fleet_;
-	}
-	const Ferry* get_ferry() const {
-		return ferry_;
-	}
-	Ferry* get_ferry() {
-		return ferry_;
-	}
+	const FerryFleet* get_fleet(const EditorGameBase& egbase) const;
+	FerryFleet* get_fleet(const EditorGameBase& egbase);
+	const Ferry* get_ferry(const EditorGameBase& egbase) const;
+	Ferry* get_ferry(const EditorGameBase& egbase);
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -87,8 +79,8 @@ private:
 
 	void request_ferry(EditorGameBase& egbase);
 
-	Ferry* ferry_;
-	FerryFleet* fleet_;
+	OPtr<Ferry> ferry_;
+	OPtr<FerryFleet> fleet_;
 };
 }  // namespace Widelands
 

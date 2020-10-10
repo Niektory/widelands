@@ -124,8 +124,8 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 			const MapObjectType type = imm->descr().type();
 			if (type == MapObjectType::WATERWAY) {
 				upcast(Waterway, ww, imm);
-				if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
-					return ww->get_fleet()->merge(egbase, this);
+				if (ww->get_fleet(egbase) != this && ww->get_owner() == get_owner()) {
+					return ww->get_fleet(egbase)->merge(egbase, this);
 				}
 			}
 		}
@@ -212,10 +212,10 @@ uint32_t FerryFleet::count_unattended_waterways() const {
 
 // Returns true of this waterway has a ferry or a ferry is on the way there
 bool FerryFleet::has_ferry(const Waterway& ww) const {
-	if (ww.get_ferry()) {
+	if (ww.get_ferry(owner().egbase())) {
 		return true;
 	}
-	assert(ww.get_fleet() == this);
+	assert(ww.get_fleet(owner().egbase()) == this);
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == &ww) {
 			return false;
@@ -257,7 +257,7 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime) {
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == waterway) {
-			if (waterway->get_fleet() != this) {
+			if (waterway->get_fleet(egbase) != this) {
 				waterway->set_fleet(this);
 			}
 			// One and the same request may be issued twice, e.g. when splitting a waterway – ignore
