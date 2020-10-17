@@ -1,0 +1,76 @@
+selected language: en
+using locale en_US.utf-8
+Graphics: Try to set Videomode 1x1
+Graphics: OpenGL: Version "4.6.0 NVIDIA 440.100"
+Graphics: SDL_GL_RED_SIZE is 8
+Graphics: SDL_GL_GREEN_SIZE is 8
+Graphics: SDL_GL_BLUE_SIZE is 8
+Graphics: SDL_GL_ALPHA_SIZE is 0
+Graphics: SDL_GL_BUFFER_SIZE is 24
+Graphics: SDL_GL_DOUBLEBUFFER is 1
+Graphics: SDL_GL_DEPTH_SIZE is 24
+Graphics: SDL_GL_STENCIL_SIZE is 0
+Graphics: SDL_GL_ACCUM_RED_SIZE is 16
+Graphics: SDL_GL_ACCUM_GREEN_SIZE is 16
+Graphics: SDL_GL_ACCUM_BLUE_SIZE is 16
+Graphics: SDL_GL_ACCUM_ALPHA_SIZE is 16
+Graphics: SDL_GL_STEREO is 0
+Graphics: SDL_GL_MULTISAMPLEBUFFERS is 0
+Graphics: SDL_GL_MULTISAMPLESAMPLES is 0
+Graphics: SDL_GL_ACCELERATED_VISUAL is 1
+Graphics: SDL_GL_CONTEXT_MAJOR_VERSION is 2
+Graphics: SDL_GL_CONTEXT_MINOR_VERSION is 1
+Graphics: SDL_GL_CONTEXT_FLAGS is 0
+Graphics: SDL_GL_CONTEXT_PROFILE_MASK is 0
+Graphics: SDL_GL_SHARE_WITH_CURRENT_CONTEXT is 0
+Graphics: SDL_GL_FRAMEBUFFER_SRGB_CAPABLE is 0
+Graphics: OpenGL: Double buffering enabled
+Graphics: OpenGL: Max texture size: 16384
+Graphics: OpenGL: ShadingLanguage: "4.60 NVIDIA"
+**** GRAPHICS REPORT ****
+ VIDEO DRIVER GLVND x11
+ pixel fmt 370546692
+ size 640 480
+**** END GRAPHICS REPORT ****
+Style Manager: Reading style templates took 26ms
+┏━ Running Lua for world:
+┃    Resources: 2ms
+┃    Terrains: 18ms
+┃    Immovables: 345ms
+┃    Critters: 223ms
+┗━ took: 588ms
+Loading the world took 602ms
+┏━ Running Lua for tribes:
+┃    Ships: 730ms
+WARNING: Preciousness of 40 is a bit high for ware/worker 'coal' and tribe 'frisians'. We recommend not going over 25.
+┃    Wares: 114ms
+┃    Immovables: 306ms
+┃    Workers: 2443ms
+┃    Warehouses: 267ms
+┃    Productionsites: 1054ms
+┃    Trainingsites: 190ms
+┃    Militarysites: 280ms
+┃    Partially finished buildings: 3ms
+┃    Tribe infos: 87ms
+┗━ took: 5474ms
+Loading the tribes took 5476ms
+==========================================
+WRITING 'idle' animation for 'spruce_summer_mature'. It has 4 pictures and 1 scales.
+CREATING 92 x 98 spritesheet with 2 columns, 4 frames. Image size: 46 x 49.
+Frame 0 at: 0, 0, 46, 49
+Frame 1 at: 46, 0, 92, 49
+Frame 2 at: 0, 49, 46, 98
+Frame 3 at: 46, 49, 92, 98
+Wrote spritesheet to trees/trees.converted/spruce/idle_1.png
+LUA CODE:
+idle = {
+   directory = path.dirname(__file__),
+   basename = "idle",
+   fps = 8,
+   frames = 4,
+   rows = 2,
+   columns = 2,
+   hotspot = { 12, 48 }
+}
+Done!
+lastserial: 0
