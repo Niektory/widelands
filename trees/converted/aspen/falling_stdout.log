@@ -1,0 +1,81 @@
+selected language: en
+using locale en_US.utf-8
+Graphics: Try to set Videomode 1x1
+Graphics: OpenGL: Version "4.6.0 NVIDIA 440.100"
+Graphics: SDL_GL_RED_SIZE is 8
+Graphics: SDL_GL_GREEN_SIZE is 8
+Graphics: SDL_GL_BLUE_SIZE is 8
+Graphics: SDL_GL_ALPHA_SIZE is 0
+Graphics: SDL_GL_BUFFER_SIZE is 24
+Graphics: SDL_GL_DOUBLEBUFFER is 1
+Graphics: SDL_GL_DEPTH_SIZE is 24
+Graphics: SDL_GL_STENCIL_SIZE is 0
+Graphics: SDL_GL_ACCUM_RED_SIZE is 16
+Graphics: SDL_GL_ACCUM_GREEN_SIZE is 16
+Graphics: SDL_GL_ACCUM_BLUE_SIZE is 16
+Graphics: SDL_GL_ACCUM_ALPHA_SIZE is 16
+Graphics: SDL_GL_STEREO is 0
+Graphics: SDL_GL_MULTISAMPLEBUFFERS is 0
+Graphics: SDL_GL_MULTISAMPLESAMPLES is 0
+Graphics: SDL_GL_ACCELERATED_VISUAL is 1
+Graphics: SDL_GL_CONTEXT_MAJOR_VERSION is 2
+Graphics: SDL_GL_CONTEXT_MINOR_VERSION is 1
+Graphics: SDL_GL_CONTEXT_FLAGS is 0
+Graphics: SDL_GL_CONTEXT_PROFILE_MASK is 0
+Graphics: SDL_GL_SHARE_WITH_CURRENT_CONTEXT is 0
+Graphics: SDL_GL_FRAMEBUFFER_SRGB_CAPABLE is 0
+Graphics: OpenGL: Double buffering enabled
+Graphics: OpenGL: Max texture size: 16384
+Graphics: OpenGL: ShadingLanguage: "4.60 NVIDIA"
+**** GRAPHICS REPORT ****
+ VIDEO DRIVER GLVND x11
+ pixel fmt 370546692
+ size 640 480
+**** END GRAPHICS REPORT ****
+Style Manager: Reading style templates took 225ms
+┏━ Running Lua for world:
+┃    Resources: 11ms
+┃    Terrains: 45ms
+┃    Immovables: 2281ms
+┃    Critters: 1007ms
+┗━ took: 3345ms
+Loading the world took 3378ms
+┏━ Running Lua for tribes:
+┃    Ships: 1940ms
+WARNING: Preciousness of 40 is a bit high for ware/worker 'coal' and tribe 'frisians'. We recommend not going over 25.
+┃    Wares: 1187ms
+┃    Immovables: 1841ms
+┃    Workers: 8991ms
+┃    Warehouses: 1192ms
+┃    Productionsites: 4289ms
+┃    Trainingsites: 772ms
+┃    Militarysites: 1707ms
+┃    Partially finished buildings: 25ms
+┃    Tribe infos: 226ms
+┗━ took: 22170ms
+Loading the tribes took 22183ms
+==========================================
+WRITING 'falling' animation for 'aspen_summer_old'. It has 9 pictures and 1 scales.
+CREATING 270 x 192 spritesheet with 3 columns, 9 frames. Image size: 90 x 64.
+Frame 0 at: 0, 0, 90, 64
+Frame 1 at: 90, 0, 180, 64
+Frame 2 at: 180, 0, 270, 64
+Frame 3 at: 0, 64, 90, 128
+Frame 4 at: 90, 64, 180, 128
+Frame 5 at: 180, 64, 270, 128
+Frame 6 at: 0, 128, 90, 192
+Frame 7 at: 90, 128, 180, 192
+Frame 8 at: 180, 128, 270, 192
+Wrote spritesheet to trees/converted/aspen/falling_1.png
+LUA CODE:
+falling = {
+   directory = path.dirname(__file__),
+   basename = "falling",
+   fps = 10,
+   frames = 9,
+   rows = 3,
+   columns = 3,
+   hotspot = { 20, 59 }
+}
+Done!
+lastserial: 0
