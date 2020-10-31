@@ -204,7 +204,7 @@ bool GameChatPanel::try_autocomplete() {
 		// Found something. Cut off the space
 		++namepart_start;
 	}
-	if (str[namepart_start] == '@') {
+	if (str[namepart_start] == '@' && namepart_start == 0) {
 		// If the first sign of the name is an @, skip it
 		++namepart_start;
 	}
